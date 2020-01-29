@@ -4,8 +4,13 @@ import logger from 'logger'
 import App from './App.vue'
 import config from 'config'
 import router from './router'
-import store from './store/index.js'
+import { store } from './store/index.js'
 import api from './interfaces/apiInterface'
+import VueMaterial from 'vue-material'
+import 'vue-material/dist/vue-material.min.css'
+import 'vue-material/dist/theme/default.css' // This line here
+
+Vue.use(VueMaterial)
 
 // prevents from display notice about running in dev mode
 Vue.config.productionTip = false
