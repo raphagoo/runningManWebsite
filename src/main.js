@@ -3,7 +3,7 @@ import logger from 'logger'
 
 import App from './App.vue'
 import config from 'config'
-import router from './router'
+import { router } from './router'
 import { store } from './store/index.js'
 import api from './interfaces/apiInterface'
 import VueMaterial from 'vue-material'

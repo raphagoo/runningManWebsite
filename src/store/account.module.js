@@ -1,6 +1,6 @@
 import $log from 'logger';
 import api from '../interfaces/apiInterface';
-import router from '../router';
+import {router} from '../router';
 
 const user = JSON.parse(sessionStorage.getItem('user'));
 const state = user
@@ -10,23 +10,25 @@ const state = user
 const actions = {
     //Connexion
     login({dispatch, commit}, user){// eslint-disable-line no-unused-vars
-        commit('loginRequest', user);
-        console.log(user)
-        api.post('/user/login', user, { headers:{"Content-Type": "application/json"}})
-            .then(
-                response => {
-                    sessionStorage.setItem('token', (`${response.data.token_type} ${response.data.access_token}`))
-                    commit('loginSuccess', response.data)
-                    router.push({path: '/'})
-                },
-                error => {
-                    $log.info('Erreur : ', error)
-                }
-            );
+        return new Promise((resolve, reject) => {
+            commit('loginRequest', user);
+            api.post('/user/login', user, { headers:{"Content-Type": "application/json"}})
+                .then(
+                    response => {
+                        sessionStorage.setItem('user', response.data)
+                        commit('loginSuccess', response.data)
+                        resolve(response)
+                    },
+                    error => {
+                        $log.info('Erreur : ', error)
+                        reject(error)
+                    }
+                );
+        })
     },
 
     logout(){
-        sessionStorage.removeItem('token');
+        sessionStorage.removeItem('user');
         router.push('/')
     }
 }
@@ -35,9 +37,9 @@ const mutations = {
     loginRequest(){
         $log.info('account.module.login.request')
     },
-    loginSuccess(state, token){
+    loginSuccess(state, data){
         $log.info('account.module.login.success')
-        state.token = token
+        state.user = data
     }
 }
 
