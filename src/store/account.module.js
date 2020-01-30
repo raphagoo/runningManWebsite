@@ -13,7 +13,7 @@ const actions = {
     login({dispatch, commit}, user){// eslint-disable-line no-unused-vars
         return new Promise((resolve, reject) => {
             commit('loginRequest', user);
-            api.post('/user/login', user, { headers:{"Content-Type": "application/json"}})
+            api.post('/admin/login', user, { headers:{"Content-Type": "application/json"}})
                 .then(
                     response => {
                         sessionStorage.setItem('token', response.data.token)
