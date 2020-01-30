@@ -2,9 +2,10 @@ import $log from 'logger';
 import api from '../interfaces/apiInterface';
 import {router} from '../router';
 
-const user = JSON.parse(sessionStorage.getItem('user'));
-const state = user
-    ? { status: { loggedIn: true }, user }
+
+const token = sessionStorage.getItem('token');
+const state = token
+    ? { status: { loggedIn: true }, token }
     : { status: {}, user: null };
 
 const actions = {
@@ -15,8 +16,8 @@ const actions = {
             api.post('/user/login', user, { headers:{"Content-Type": "application/json"}})
                 .then(
                     response => {
-                        sessionStorage.setItem('user', response.data)
-                        commit('loginSuccess', response.data)
+                        sessionStorage.setItem('token', response.data.token)
+                        commit('loginSuccess', response.data.user)
                         resolve(response)
                     },
                     error => {
@@ -37,9 +38,9 @@ const mutations = {
     loginRequest(){
         $log.info('account.module.login.request')
     },
-    loginSuccess(state, data){
+    loginSuccess(state, user){
         $log.info('account.module.login.success')
-        state.user = data
+        state.user = user
     }
 }
 

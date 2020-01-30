@@ -21,6 +21,16 @@ export const router = new Router({
             component: Login
         },
         {
+            path: '/races',
+            name: 'races',
+            component: Home
+        },
+        {
+            path: '/users',
+            name: 'users',
+            component: Home
+        },
+        {
             path: '*',
             redirect: '/',
         },
@@ -32,7 +42,7 @@ router.beforeEach((to, from, next) => {
     // redirect to login page if not logged in and trying to access a restricted page
     const publicPages = ['/login', '/register'];
     const authRequired = !publicPages.includes(to.path);
-    const loggedIn = sessionStorage.getItem('user');
+    const loggedIn = sessionStorage.getItem('token');
 
     if (authRequired && !loggedIn) {
         return next('/login');
