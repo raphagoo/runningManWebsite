@@ -11,7 +11,7 @@ const actions = {
         .then(response => {
             commit('getAllUsersSuccess', response.data)
         }, error => {
-            $log.debug(error)
+            $log.info(error)
         })
     }
 }
