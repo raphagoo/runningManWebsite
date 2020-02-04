@@ -18,7 +18,11 @@
            <md-table-row slot="md-table-row" slot-scope="{ item }" md-selectable="single">
                <md-table-cell md-label="ID" md-sort-by="id">{{item._id}}</md-table-cell>
                <md-table-cell md-label="Username" md-sort-by="username">{{item.username}}</md-table-cell>
-               <md-table-cell md-label="Actions"></md-table-cell>
+               <md-table-cell md-label="Actions">
+                   <md-button v-if="item.isAdmin === false" class="md-dense md-primary md-icon-button"><md-icon>directions_run</md-icon></md-button>
+                   <md-button v-if="item.isAdmin === false" class="md-dense md-primary md-icon-button"><md-icon>arrow_upward</md-icon></md-button>
+                   <md-button class="md-dense md-accent md-icon-button"><md-icon>delete</md-icon></md-button>
+                </md-table-cell>
            </md-table-row>
         </md-table>
         <div class="userSelectedContainer" v-if="selectedUser !== null">
@@ -78,7 +82,8 @@
                 newUser: {
                     username: null,
                     password: null
-                }
+                },
+                isAdmin: null
             }
         },
         methods: {

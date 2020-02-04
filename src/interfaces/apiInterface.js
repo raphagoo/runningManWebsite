@@ -24,7 +24,8 @@ api.interceptors.request.use(
 api.interceptors.response.use(function (response) {
     return response;
 }, function (error) {
-    if (401 === error) {
+    $log.debug(error.response)
+    if (401 === error.response.status) {
         Swal.fire({
             title: "Session Expired",
             text: "Your session has expired. Would you like to be redirected to the login page?",
@@ -38,7 +39,7 @@ api.interceptors.response.use(function (response) {
             }
         })
     }
-    else if(403 === error){
+    else if(403 === error.response.status){
         Swal.fire({
             title: "Unauthorized",
             text: " This account isn't authorized to access the backoffice",
