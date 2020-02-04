@@ -6,14 +6,20 @@ const state = {
 }
 
 const actions = {
+    
     getAllUsers({commit}){
-        api.get('/user/list')
-        .then(response => {
-            commit('getAllUsersSuccess', response.data)
-        }, error => {
-            $log.info(error)
+        return new Promise((resolve, reject) => {
+            api.get('/user/list')
+            .then(response => {
+                commit('getAllUsersSuccess', response.data)
+                resolve(response)
+            }, error => {
+                $log.info(error)
+                reject(error)
+            })
         })
     }
+
 }
 
 const mutations = {

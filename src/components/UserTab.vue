@@ -51,6 +51,7 @@
 
 <script>
     import {mapActions, mapState} from 'vuex'
+    import $log from 'logger'
     const toLower = text => {
         return text.toString().toLowerCase()
     }
@@ -95,6 +96,11 @@
             },
             retrieveAllUsers(){
                 this.getAllUsers()
+                .then(() => {
+                    this.searched = this.users
+                }, error => {
+                    $log.info(error)
+                })
             },
             onSelect (item) {
                 this.selectedUser = item
