@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <md-button @click="retrieveAllUsers()" class="md-raised md-primary">Retrieve all users</md-button>
+        <md-button @click="retrieveAllUsers()" class="md-raised md-primary"><md-icon>refresh</md-icon> Refresh User list</md-button>
         <md-table md-fixed-header v-model="searched" md-card md-sort="username" md-sort-order="asc" @md-selected="onSelect">
             <md-table-toolbar>
                 <div class="md-toolbar-section-start">

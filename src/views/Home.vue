@@ -2,13 +2,13 @@
     <div class="container">
         <Header/>
         <md-tabs class="md-primary" md-alignment="centered" md-sync-route>
-          <md-tab id="tab-home" to="/" md-label="Home" exact>
+          <md-tab id="tab-home" to="/" md-label="Home" md-icon="home" exact>
               Test
           </md-tab>
-          <md-tab id="tab-users" to="/users" md-label="Users">
+          <md-tab id="tab-users" to="/users" md-label="Users" md-icon="group">
               <UserTab/>
           </md-tab>
-          <md-tab id="tab-races" to="/races" md-label="Races">
+          <md-tab id="tab-races" to="/races" md-label="Races" md-icon="bar_chart">
               <RaceTab/>
           </md-tab>
         </md-tabs>
