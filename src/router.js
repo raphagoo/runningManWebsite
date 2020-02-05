@@ -3,6 +3,7 @@ import Router from 'vue-router';
 
 import Home from './views/Home.vue';
 import Login from "./views/Login.vue";
+import userRaces from './components/userRaces.vue';
 
 Vue.use(Router);
 
@@ -29,6 +30,11 @@ export const router = new Router({
             path: '/users',
             name: 'users',
             component: Home
+        },
+        { 
+            name: 'userRaces',
+            path: '/user/:id/races',
+            component: userRaces 
         },
         {
             path: '*',

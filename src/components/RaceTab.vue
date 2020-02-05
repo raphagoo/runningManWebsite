@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        mon test race
+        stats, dernières courses etc
     </div>
 </template>
 

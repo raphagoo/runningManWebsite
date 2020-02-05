@@ -20,7 +20,7 @@
                <md-table-cell md-label="Username" md-sort-by="username">{{item.username}}</md-table-cell>
                <md-table-cell md-label="Actions">
                    <md-button v-if="item.isAdmin === false" class="md-dense md-primary md-icon-button"><md-icon>directions_run</md-icon></md-button>
-                   <md-button v-if="item.isAdmin === false" class="md-dense md-primary md-icon-button"><md-icon>arrow_upward</md-icon></md-button>
+                   <md-button v-if="item.isAdmin === false" class="md-dense md-primary md-icon-button" @click="upgradeUser(item)"><md-icon>arrow_upward</md-icon></md-button>
                    <md-button class="md-dense md-accent md-icon-button"><md-icon>delete</md-icon></md-button>
                 </md-table-cell>
            </md-table-row>
@@ -29,7 +29,7 @@
             {{selectedUser.username}}
             <div v-if="selectedUser.isAdmin === true">Administrator</div>
             <div v-else>User</div>
-            <md-button class="md-raised">Voir les courses</md-button><br/>
+            <router-link :to="{ name: 'userRaces', params: { id: selectedUser._id } }"><md-button class="md-raised">Voir les courses</md-button></router-link><br/>
             <md-button class="md-raised md-primary">Modifier</md-button>
             <md-button class="md-raised md-accent">Supprimer</md-button>
         </div>
@@ -89,10 +89,18 @@
         },
         methods: {
             ...mapActions('users', {
-              getAllUsers: 'getAllUsers'
+              getAllUsers: 'getAllUsers',
+              updateUser: 'updateUser'
             }),
             searchOnTable () {
               this.searched = searchByName(this.users, this.search)
+            },
+            upgradeUser(user){
+                user.toChange = {isAdmin: true}
+                this.updateUser(user)
+                .then(() => {
+                    this.retrieveAllUsers()
+                })
             },
             retrieveAllUsers(){
                 this.getAllUsers()

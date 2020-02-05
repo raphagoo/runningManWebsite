@@ -19,6 +19,29 @@ html, body{
   height: 100%;
   font-size: 24px;
   overflow: hidden;
+}
+body{
+  background: linear-gradient(270deg, #ffffff, #9f9f9f);
+background-size: 400% 400%;
 
+-webkit-animation: AnimationName 50s ease infinite;
+-moz-animation: AnimationName 50s ease infinite;
+animation: AnimationName 50s ease infinite;
+
+@-webkit-keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@-moz-keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@keyframes AnimationName {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
 }
 </style>
