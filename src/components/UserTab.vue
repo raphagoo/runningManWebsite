@@ -32,7 +32,7 @@
                     <md-card-actions md-alignment="space-between">
                       <div>
                         <md-button @click="removeUser(selectedUser)" class="md-raised md-accent">Supprimer</md-button>
-                        <md-button class="md-raised md-primary">Editer</md-button>
+                        <md-button @click="showNewForm" class="md-raised md-primary">Editer</md-button>
                       </div>
 
                       <md-card-expand-trigger  v-if="selectedUser.isAdmin !== true">
@@ -55,7 +55,7 @@
         </div>
         <div class="newUserContainer" v-if="displayNewForm === true">
             <form @submit.prevent="saveNewUser">
-                <span>New user</span>
+                <span class="formUsersTitle">New/Edit user</span>
                 <md-field>
                     <label>Username</label>
                     <md-input v-model="newUser.username"></md-input>
@@ -64,6 +64,8 @@
                     <label>Password</label>
                     <md-input type="password" v-model="newUser.password"></md-input>
                 </md-field>
+                <md-checkbox v-model="newUser.isAdmin">Administrateur</md-checkbox>
+                <md-button @click="displayNewForm = false; newUser._id = null;" class="md-accent md-raised">Cancel</md-button>
                 <md-button type="submit" class="md-primary md-raised">Save</md-button>
             </form>
         </div>
@@ -106,7 +108,9 @@
                 displayRaces: false,
                 newUser: {
                     username: null,
-                    password: null
+                    password: null,
+                    isAdmin: false,
+                    _id: null
                 },
                 isAdmin: null
             }
@@ -116,7 +120,7 @@
               getAllUsers: 'getAllUsers',
               updateUser: 'updateUser',
               addUser: 'addUser',
-              deleteUser: 'deleteUser'
+              deleteUser: 'deleteUser',
             }),
             searchOnTable () {
               this.searched = searchByName(this.users, this.search)
@@ -141,19 +145,33 @@
                 this.displayNewForm = false
                 this.selectedUser = item
             },
-            showNewForm(){
-                this.selectedUser = null
+            showNewForm(user = null){
+                if(user === null){
+                    this.selectedUser = null
+                }
+                else{
+                    this.newUser._id = this.selectedUser._id
+                    this.newUser.username = this.selectedUser.username
+                }
                 this.displayNewForm = true
             },
             saveNewUser(){
-                this.addUser(this.newUser)
-                .then(() => {
-                    Swal.fire({
-                        title: "Success",
-                        text: " The user has been created",
-                        icon: "success",
+                if(this.newUser._id === null){
+                    this.addUser(this.newUser)
+                    .then(() => {
+                        Swal.fire({
+                            title: "Success",
+                            text: " The user has been created",
+                            icon: "success",
+                        })
                     })
-                })
+                }
+                else{
+                    this.updateUser(this.newUser)
+                    .then(() => {
+                        this.retrieveAllUsers()
+                    })
+                }
             },
             removeUser(user){
                 Swal.fire({
@@ -172,7 +190,7 @@
     }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
     .md-table{
         width: 70%;
         margin-left: auto;
@@ -183,6 +201,20 @@
         margin-left: auto;
         margin-right: auto;
         margin-top: 3%;
+    }
+    .newUserContainer{
+        display: block;
+        position: absolute;
+        top: 10%;
+        padding: 15px;
+        left: 25%;
+        background-color: white;
+        box-shadow: 5px 5px 10px;
+        z-index: 2;
+
+        .formUsersTitle{
+            font-size: 1.3rem;
+        }
     }
     .racesContainer{
         position: relative;

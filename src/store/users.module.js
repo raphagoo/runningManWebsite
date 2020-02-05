@@ -43,7 +43,10 @@ const actions = {
 
     updateUser({commit}, user){
         return new Promise((resolve, reject) => {
-            api.put('/user/' + user._id, user.toChange)
+            api.put('/user/' + user._id, {
+                username: user.username,
+                isAdmin: user.isAdmin
+            })
                 .then(response => {
                     commit('updateUserSuccess', response.data)
                     resolve(response)
