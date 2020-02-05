@@ -29,6 +29,18 @@ const actions = {
         })
     },
 
+    addUser({commit}, user){
+        return new Promise((resolve, reject) => {
+            api.post('/user/register', user)
+            .then(response => {
+                commit('addUserSuccess', response.data)
+                resolve(response)
+            }, error => {
+                reject(error)
+            })
+        })
+    },
+
     updateUser({commit}, user){
         return new Promise((resolve, reject) => {
             api.put('/user/' + user._id, user.toChange)
@@ -39,12 +51,20 @@ const actions = {
                     reject(error)
                 })
         })
+    },
+
+    deleteUser({commit}, user){
+        api.delete('/user/'+ user._id)
+        .then(response => {
+            commit('deleteUserSuccess', response.data)
+        })
     }
 }
 
 const mutations = {
     getAllUsersSuccess(state, users){
         state.all = users
+        state.selected = null
     },
     updateUserSuccess(state, user){
         let index = state.all.findIndex(x => x._id === user._id)
@@ -52,6 +72,14 @@ const mutations = {
     },
     getUserSuccess(state, user){
         state.selected = user
+    },
+    addUserSuccess(state, user){
+        state.all.push(user)
+    },
+    deleteUserSuccess(state, user){
+        state.all = state.all.filter(function( obj ) {
+            return obj._id !== user._id;
+        });
     }
 }
 export const users = {

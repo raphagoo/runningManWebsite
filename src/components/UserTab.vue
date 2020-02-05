@@ -18,23 +18,43 @@
            <md-table-row slot="md-table-row" slot-scope="{ item }" md-selectable="single">
                <md-table-cell md-label="ID" md-sort-by="id">{{item._id}}</md-table-cell>
                <md-table-cell md-label="Username" md-sort-by="username">{{item.username}}</md-table-cell>
-               <md-table-cell md-label="Actions">
-                   <md-button v-if="item.isAdmin === false" class="md-dense md-primary md-icon-button"><md-icon>directions_run</md-icon></md-button>
-                   <md-button v-if="item.isAdmin === false" class="md-dense md-primary md-icon-button" @click="upgradeUser(item)"><md-icon>arrow_upward</md-icon></md-button>
-                   <md-button class="md-dense md-accent md-icon-button"><md-icon>delete</md-icon></md-button>
-                </md-table-cell>
            </md-table-row>
         </md-table>
-        <div class="userSelectedContainer" v-if="selectedUser !== null">
-            {{selectedUser.username}}
-            <div v-if="selectedUser.isAdmin === true">Administrator</div>
-            <div v-else>User</div>
-            <router-link :to="{ name: 'userRaces', params: { id: selectedUser._id } }"><md-button class="md-raised">Voir les courses</md-button></router-link><br/>
-            <md-button class="md-raised md-primary">Modifier</md-button>
-            <md-button class="md-raised md-accent">Supprimer</md-button>
+        <div class="userSelectedContainer" v-if="selectedUser !== null && selectedUser !== undefined">
+           <md-card>
+                <md-card-header>
+                  <div class="md-title">{{selectedUser.username}}</div>
+                  <div v-if="selectedUser.isAdmin === true" class="md-subhead">Administrator</div>
+                  <div v-else class="md-subhead">User</div>
+                </md-card-header>
+
+                <md-card-expand>
+                    <md-card-actions md-alignment="space-between">
+                      <div>
+                        <md-button @click="removeUser(selectedUser)" class="md-raised md-accent">Supprimer</md-button>
+                        <md-button class="md-raised md-primary">Editer</md-button>
+                      </div>
+
+                      <md-card-expand-trigger  v-if="selectedUser.isAdmin !== true">
+                        <md-button class="md-icon-button">
+                          <md-icon>keyboard_arrow_down</md-icon>
+                        </md-button>
+                      </md-card-expand-trigger>
+                    </md-card-actions>
+
+                    <md-card-expand-content>
+                        <md-card-content>
+                            <span>Races</span>
+                            <div v-for="race in selectedUser.races" :key="race._id">
+                                {{race.name}}
+                            </div>
+                        </md-card-content>
+                    </md-card-expand-content>
+                </md-card-expand>
+            </md-card>
         </div>
         <div class="newUserContainer" v-if="displayNewForm === true">
-            <form>
+            <form @submit.prevent="saveNewUser">
                 <span>New user</span>
                 <md-field>
                     <label>Username</label>
@@ -44,6 +64,7 @@
                     <label>Password</label>
                     <md-input type="password" v-model="newUser.password"></md-input>
                 </md-field>
+                <md-button type="submit" class="md-primary md-raised">Save</md-button>
             </form>
         </div>
     </div>
@@ -52,6 +73,7 @@
 <script>
     import {mapActions, mapState} from 'vuex'
     import $log from 'logger'
+    import Swal from 'sweetalert2'
     const toLower = text => {
         return text.toString().toLowerCase()
     }
@@ -69,6 +91,7 @@
             ...mapState({
             users: state => state.users.all,
             races: state => state.races,
+            selected: state => state.users.selected
             }),
         },
         created(){
@@ -80,6 +103,7 @@
                 searched: [],
                 search: null,
                 displayNewForm: false,
+                displayRaces: false,
                 newUser: {
                     username: null,
                     password: null
@@ -90,7 +114,9 @@
         methods: {
             ...mapActions('users', {
               getAllUsers: 'getAllUsers',
-              updateUser: 'updateUser'
+              updateUser: 'updateUser',
+              addUser: 'addUser',
+              deleteUser: 'deleteUser'
             }),
             searchOnTable () {
               this.searched = searchByName(this.users, this.search)
@@ -103,6 +129,7 @@
                 })
             },
             retrieveAllUsers(){
+                this.selectedUser = null
                 this.getAllUsers()
                 .then(() => {
                     this.searched = this.users
@@ -111,11 +138,35 @@
                 })
             },
             onSelect (item) {
+                this.displayNewForm = false
                 this.selectedUser = item
             },
             showNewForm(){
                 this.selectedUser = null
                 this.displayNewForm = true
+            },
+            saveNewUser(){
+                this.addUser(this.newUser)
+                .then(() => {
+                    Swal.fire({
+                        title: "Success",
+                        text: " The user has been created",
+                        icon: "success",
+                    })
+                })
+            },
+            removeUser(user){
+                Swal.fire({
+                    title: "Warning",
+                    text: "Do you really want to remove this user ?",
+                    icon: "warning",
+                    showCancelButton: true,
+                })
+                .then((result) => {
+                    if(result.value){
+                        this.deleteUser(user)
+                    }
+                })
             }
         }
     }
@@ -131,10 +182,12 @@
         width: 50%;
         margin-left: auto;
         margin-right: auto;
-        margin-top: 5%;
-        border:1px solid black;
-        border-radius: 12px;
-        padding: 10px;
-        text-align: center;
+        margin-top: 3%;
+    }
+    .racesContainer{
+        position: relative;
+        width: 70%;
+        margin-left: auto;
+        margin-right: auto;
     }
 </style>
