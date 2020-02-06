@@ -15,7 +15,7 @@ html, body{
   margin: 0;
   min-width: 100%;
   min-height: 100%;
-  background-color: white;
+  background-color: white !important;
   width: 100%;
   height: 100%;
   font-size: 24px;

@@ -3,7 +3,7 @@
         <Header/>
         <md-tabs class="md-primary" md-alignment="centered" md-sync-route>
           <md-tab id="tab-home" to="/" md-label="Home" md-icon="home" exact>
-              Test
+              <HomeTab/>
           </md-tab>
           <md-tab id="tab-users" to="/users" md-label="Users" md-icon="group">
               <UserTab/>
@@ -17,13 +17,14 @@
 </template>
 
 <script>
+    import HomeTab from '../components/HomeTab.vue'
     import UserTab from '../components/UserTab.vue'
     import RaceTab from '../components/RaceTab.vue'
     import Header from '../components/Header.vue';
     import Footer from '../components/Footer.vue';
     export default {
         name: "Home",
-        components: {Header, Footer, UserTab, RaceTab}
+        components: {Header, Footer, UserTab, RaceTab, HomeTab}
     }
 </script>
 
