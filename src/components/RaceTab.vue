@@ -1,8 +1,13 @@
 <template>
+<div>
     <div class="lastRacesContainer">
         <span class="md-headline">Courses des 7 derniers jours</span>
         <line-chart :messages="{empty: 'No data'}" :colors="['blue', 'blue']" xtitle="Date" ytitle="Courses" :data="races.lastRaces"></line-chart>
     </div>
+    <div class="geoChart">
+        <geo-chart :data="[['United States', 44], ['Germany', 23], ['Brazil', 22]]"></geo-chart>
+    </div>
+</div>
 </template>
 
 <script>
