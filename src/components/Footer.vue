@@ -5,8 +5,9 @@
 </template>
 <style lang="scss" scoped>
     .footer{
-        position: fixed;
+        padding: 10px;
         left: 0;
+        background-color: whitesmoke;
         bottom: 0;
         width: 100%;
         text-align: center;

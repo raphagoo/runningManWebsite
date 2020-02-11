@@ -2,7 +2,11 @@
 <div>
     <div class="lastRacesContainer">
         <h1 class="md-headline">Courses des 7 derniers jours</h1>
-        <line-chart :messages="{empty: 'No data'}" :colors="['blue', 'blue']" xtitle="Date" ytitle="Courses" :data="races.lastRaces"></line-chart>
+        <area-chart :messages="{empty: 'No data'}" xtitle="Date" ytitle="Courses" :data="races.lastRaces"></area-chart>
+    </div>
+    <div class="distancesRacesContainer">
+        <h1 class="md-headline">Distances des courses</h1>
+        <bar-chart :messages="{empty: 'No data'}" :data="races.distancesData"></bar-chart>
     </div>
     <div class="geoChart">
         <h1 class="md-headline">Carte des courses</h1>
@@ -23,11 +27,13 @@ import { mapState, mapActions } from 'vuex'
     created(){
         this.getRacesStats()
         this.getCountryStats()
+        this.getDistancesStats()
     },
     methods: {
     ...mapActions('races', {
         getRacesStats: 'getRacesStats',
-        getCountryStats: 'getCountryStats'
+        getCountryStats: 'getCountryStats',
+        getDistancesStats: 'getDistancesStats'
     })
     }
     }
@@ -38,7 +44,10 @@ h1{
     text-align: center;
     padding-bottom: 10px;
 }
-.lastRacesContainer{
+.geoChart{
+    margin-bottom: 5%;
+}
+.lastRacesContainer, .distancesRacesContainer{
         width: 70%;
         position: relative;
         margin-left: auto;

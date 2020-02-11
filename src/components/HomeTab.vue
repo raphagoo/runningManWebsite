@@ -34,11 +34,11 @@ export default {
         })
     },
     created(){
-        this.getRacesStats()
+        this.listRaces()
     },
     methods: {
     ...mapActions('races', {
-        getRacesStats: 'getRacesStats',
+        listRaces: 'listRaces',
     })
     }
 }

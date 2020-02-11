@@ -2,6 +2,12 @@ import api from "../interfaces/apiInterface";
 
 const state = {}
 const actions = {
+    listRaces({commit}){
+        api.get('/race')
+        .then(response => {
+            commit('listRacesSuccess', response.data)
+        })
+    },
     getRacesStats({commit}){
         api.get('/race/all/stats')
         .then(response => {
@@ -13,19 +19,28 @@ const actions = {
         .then(response => {
             commit('getCountryStatsSuccess', response.data)
         })
+    },
+    getDistancesStats({commit}){
+        api.get('/race/distances/stats')
+        .then(response => {
+            commit('getDistancesStatsSuccess', response.data)
+        })
     }
 }
 const mutations = {
-    getRacesStatsSuccess(state, data){
-        state.racesNumber = data.races.length
+    listRacesSuccess(state, data){
+        console.log(data)
+        state.racesNumber = data.length
         state.totalDistance = 0
-        data.races.forEach(race => {
+        data.forEach(race => {
             if(race.distance !== undefined){
                 state.totalDistance = state.totalDistance + race.distance
             }
         })
         state.totalDistance = state.totalDistance / 1000
         state.averageDistance = state.totalDistance / state.racesNumber
+    },
+    getRacesStatsSuccess(state, data){
         state.lastRaces = {}
         data.stats.forEach(stat => {
             let splittedDate = stat.date.split('T')
@@ -34,6 +49,9 @@ const mutations = {
     },
     getCountryStatsSuccess(state, data){
         state.countryData = data
+    },
+    getDistancesStatsSuccess(state, data){
+        state.distancesData = data
     }
 }
 
