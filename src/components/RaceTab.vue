@@ -1,11 +1,12 @@
 <template>
 <div>
     <div class="lastRacesContainer">
-        <span class="md-headline">Courses des 7 derniers jours</span>
+        <h1 class="md-headline">Courses des 7 derniers jours</h1>
         <line-chart :messages="{empty: 'No data'}" :colors="['blue', 'blue']" xtitle="Date" ytitle="Courses" :data="races.lastRaces"></line-chart>
     </div>
     <div class="geoChart">
-        <geo-chart :data="[['United States', 44], ['Germany', 23], ['Brazil', 22]]"></geo-chart>
+        <h1 class="md-headline">Carte des courses</h1>
+        <geo-chart :data="races.countryData"></geo-chart>
     </div>
 </div>
 </template>
@@ -21,17 +22,19 @@ import { mapState, mapActions } from 'vuex'
     },
     created(){
         this.getRacesStats()
+        this.getCountryStats()
     },
     methods: {
     ...mapActions('races', {
         getRacesStats: 'getRacesStats',
+        getCountryStats: 'getCountryStats'
     })
     }
     }
 </script>
 
 <style lang="scss" scoped>
-.md-headline{
+h1{
     text-align: center;
     padding-bottom: 10px;
 }

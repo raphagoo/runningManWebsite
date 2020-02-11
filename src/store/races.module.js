@@ -7,11 +7,16 @@ const actions = {
         .then(response => {
             commit('getRacesStatsSuccess', response.data)
         })
+    },
+    getCountryStats({commit}){
+        api.get('/race/country/stats')
+        .then(response => {
+            commit('getCountryStatsSuccess', response.data)
+        })
     }
 }
 const mutations = {
     getRacesStatsSuccess(state, data){
-        console.log(data)
         state.racesNumber = data.races.length
         state.totalDistance = 0
         data.races.forEach(race => {
@@ -26,6 +31,9 @@ const mutations = {
             let splittedDate = stat.date.split('T')
             state.lastRaces[splittedDate[0]] = stat.count
         })
+    },
+    getCountryStatsSuccess(state, data){
+        state.countryData = data
     }
 }
 
