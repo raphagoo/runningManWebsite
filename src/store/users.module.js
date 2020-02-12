@@ -24,7 +24,6 @@ const actions = {
     getUser({commit}, id){
         api.get('/user/' + id)
         .then(response => {
-            console.log(response)
             commit('getUserSuccess', response.data)
         })
     },
