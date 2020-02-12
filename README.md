@@ -2,6 +2,7 @@
 
 The structure of my usuals Vue projects
 
+![Vue.js CI](https://github.com/raphagoo/runningManWebsite/workflows/Vue.js%20CI/badge.svg)
 [![Dependency Status](https://david-dm.org/raphagoo/vue-starter/status.svg)](https://david-dm.org/raphagoo/vue-starter#info=dependencies) [![devDependency Status](https://david-dm.org/raphagoo/vue-starter/dev-status.svg)](https://david-dm.org/raphagoo/vue-starter#info=devDependencies)
 
 Here is a more complete [description](./description.md).
