@@ -29,6 +29,12 @@
 </script>
 
 <style scoped>
+.md-tab{
+    width: 100%;
+    height: 100%;
+    min-width: 100%;
+    min-height: 93vh;
+}
     .container{
         display: block;
         position: relative;

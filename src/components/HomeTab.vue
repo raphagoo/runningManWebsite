@@ -1,19 +1,20 @@
 <template>
     <div class="homeContainer">
-        <p class="md-display-4">Running Man - BackOffice</p>
-        <p class="md-display-3"><span class="statNumber">{{races.totalDistance}}</span> km parcourus au total</p>
-        <p class="md-display-3">Un total de <span class="statNumber">{{races.racesNumber}}</span> courses réalisées</p>
-        <p class="md-display-3">Une moyenne de <span class="statNumber">{{races.averageDistance}}</span> km par course</p>
+        <p class="md-display-2">Running Man - BackOffice</p>
+        <p class="md-display-1"><span class="statNumber">{{races.totalDistance}}</span> km parcourus au total</p>
+        <p class="md-display-1">Un total de <span class="statNumber">{{races.racesNumber}}</span> courses réalisées</p>
+        <p class="md-display-1">Une moyenne de <span class="statNumber">{{races.averageDistance}}</span> km par course</p>
         <router-link to="/races"><md-button class="md-raised md-primary">Voir les stats</md-button></router-link>
+        <md-button class="md-raised" @click="updateRace('test')">Mon test d'update</md-button>
     </div>
 </template>
 <style lang="scss" scoped>
     .homeContainer{
         text-align: center;
-        .md-display-4{
+        .md-display-2{
             color: black;
         }
-        .md-display-3{
+        .md-display-1{
             margin-bottom: 10vh;
             color: black;
             .statNumber{

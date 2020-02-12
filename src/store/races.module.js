@@ -29,7 +29,6 @@ const actions = {
 }
 const mutations = {
     listRacesSuccess(state, data){
-        console.log(data)
         state.racesNumber = data.length
         state.totalDistance = 0
         data.forEach(race => {
