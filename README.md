@@ -5,7 +5,7 @@ The structure of my usuals Vue projects
 ![Vue.js CI](https://github.com/raphagoo/runningManWebsite/workflows/Vue.js%20CI/badge.svg)
 [![Dependency Status](https://david-dm.org/raphagoo/vue-starter/status.svg)](https://david-dm.org/raphagoo/vue-starter#info=dependencies) [![devDependency Status](https://david-dm.org/raphagoo/vue-starter/dev-status.svg)](https://david-dm.org/raphagoo/vue-starter#info=devDependencies)
 [![GitHub license](https://img.shields.io/github/license/raphagoo/runningManWebsite)](https://github.com/raphagoo/runningManWebsite/blob/master/LICENSE)
-![Code Climate coverage](https://img.shields.io/codeclimate/coverage/raphagoo/runningManWebsite ?style=plastic)
+[![Code Climate coverage](https://img.shields.io/codeclimate/coverage/raphagoo/runningManWebsite?style=plastic)]
 
 Here is a more complete [description](./description.md).
 
