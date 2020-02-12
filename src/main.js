@@ -11,13 +11,11 @@ import Chart from 'chart.js'
 import Chartkick from 'vue-chartkick'
 import 'vue-material/dist/vue-material.min.css'
 import 'vue-material/dist/theme/default.css' // This line here
-import VueSocketIOExt from 'vue-socket.io-extended';
-import io from 'socket.io-client';
- 
-const socket = io('http://localhost:3000');
- 
-Vue.use(VueSocketIOExt, socket);
+import VueParticles from 'vue-particles'
 
+
+
+Vue.use(VueParticles)
 Vue.use(VueMaterial)
 Vue.use(Chartkick.use(Chart))
 // prevents from display notice about running in dev mode

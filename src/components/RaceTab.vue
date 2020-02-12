@@ -1,5 +1,6 @@
 <template>
 <div>
+    <md-button @click="getCountryStats();getDistancesStats();getRacesStats();" class="md-raised md-primary"><md-icon>refresh</md-icon> Refresh Stats list</md-button>
     <div class="lastRacesContainer">
         <h1 class="md-headline">Courses des 7 derniers jours</h1>
         <area-chart :messages="{empty: 'No data'}" xtitle="Date" ytitle="Courses" :data="races.lastRaces"></area-chart>

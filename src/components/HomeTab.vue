@@ -5,7 +5,6 @@
         <p class="md-display-1">Un total de <span class="statNumber">{{races.racesNumber}}</span> courses réalisées</p>
         <p class="md-display-1">Une moyenne de <span class="statNumber">{{races.averageDistance}}</span> km par course</p>
         <router-link to="/races"><md-button class="md-raised md-primary">Voir les stats</md-button></router-link>
-        <md-button class="md-raised" @click="updateRace('test')">Mon test d'update</md-button>
     </div>
 </template>
 <style lang="scss" scoped>
