@@ -2,6 +2,6 @@ module.exports = {
     logLevel: 'debug',
     baseHref: "/",
     api: {
-        baseUrl: "http://localhost:3000",
+        baseUrl: "https://projet-api-uf.herokuapp.com",
     },
 }
