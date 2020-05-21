@@ -3,15 +3,15 @@
     <md-button @click="getCountryStats();getDistancesStats();getRacesStats();" class="md-raised md-primary"><md-icon>refresh</md-icon> Refresh Stats list</md-button>
     <div class="lastRacesContainer">
         <h1 class="md-headline">Courses des 7 derniers jours</h1>
-        <area-chart :messages="{empty: 'No data'}" xtitle="Date" ytitle="Courses" :data="races.lastRaces"></area-chart>
+        <area-chart :messages="{empty: 'No data'}" xtitle="Date" ytitle="Courses" :data="races.lastRaces"/>
     </div>
     <div class="distancesRacesContainer">
         <h1 class="md-headline">Distances des courses</h1>
-        <bar-chart :messages="{empty: 'No data'}" :data="races.distancesData"></bar-chart>
+        <bar-chart :messages="{empty: 'No data'}" :data="races.distancesData"/>
     </div>
     <div class="geoChart">
         <h1 class="md-headline">Carte des courses</h1>
-        <geo-chart :data="races.countryData"></geo-chart>
+        <geo-chart :data="races.countryData"/>
     </div>
 </div>
 </template>
@@ -26,8 +26,8 @@ import { mapState, mapActions } from 'vuex'
         })
     },
     created(){
-        this.getRacesStats()
-        this.getCountryStats()
+        this.getRacesStats();
+        this.getCountryStats();
         this.getDistancesStats()
     },
     methods: {
