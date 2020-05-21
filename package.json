@@ -1,7 +1,7 @@
 {
     "name": "running-man-website",
     "version": "1.0.0",
-    "description": "vueJs starter kit",
+    "description": "RunningMan - Back-Office",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/raphagoo/vue-starter.git"
@@ -29,7 +29,9 @@
         "vue-material": "^1.0.0-beta-11",
         "vue-router": "^3.1.6",
         "vuex": "^3.1.3",
-        "vuex-persistedstate": "^2.7.1",
+        "vuex-persistedstate": "^2.7.1"
+    },
+    "devDependencies": {
         "@babel/core": "^7.8.7",
         "@babel/preset-env": "^7.8.7",
         "babel-loader": "^8.0.6",
@@ -50,8 +52,5 @@
         "webpack": "^4.41.5",
         "webpack-cli": "^3.3.10",
         "webpack-dev-server": "^3.11.0"
-    },
-    "devDependencies": {
-
     }
 }
