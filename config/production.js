@@ -1,6 +1,6 @@
 module.exports = {
     logLevel: 'warn',
-    baseHref: "/",
+    baseHref: "/backoffice",
     api: {
         baseUrl: "https://projet-api-uf.herokuapp.com",
     },

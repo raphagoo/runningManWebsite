@@ -36,8 +36,9 @@ const mutations = {
                 state.totalDistance = state.totalDistance + race.distance
             }
         })
-        state.totalDistance = state.totalDistance / 1000
         state.averageDistance = state.totalDistance / state.racesNumber
+        state.averageDistance = state.averageDistance.toFixed(1)
+        state.totalDistance = state.totalDistance.toFixed(1)
     },
     getRacesStatsSuccess(state, data){
         state.lastRaces = {}
