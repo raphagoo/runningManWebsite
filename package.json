@@ -22,7 +22,7 @@
     },
     "dependencies": {
         "axios": "^0.19.2",
-        "chart.js": "^2.9.3",
+        "chart.js": "^2.9.4",
         "sweetalert2": "^9.8.2",
         "vue": "^2.6.11",
         "vue-chartkick": "^0.6.0",
